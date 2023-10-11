@@ -20,7 +20,6 @@ flatpickr(date, {
   onClose(selectedDates) {
     if (selectedDates[0] <= Date.now()) {
       Notiflix.Notify.failure('Please choose a date in the future');
-      start.disabled = true;
     } else {
         start.disabled = false;
     }
@@ -47,6 +46,9 @@ function onClick() {
 }
 
 function convertMs(ms) {
+  if (ms < 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
   // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
